@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#090b10" />
+<title>Polyglot Journey — Language Learning Dashboard</title>
+<style>
+:root{
+  --bg:#07090d;--panel:rgba(255,255,255,.065);--text:#f7f8fb;--muted:#a7adba;
+  --line:rgba(255,255,255,.12);--shadow:0 28px 75px rgba(0,0,0,.4);--r:26px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--text);min-height:100vh;
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(91,120,255,.16),transparent 28%),
+    radial-gradient(circle at 88% 20%,rgba(226,76,117,.12),transparent 24%),
+    radial-gradient(circle at 50% 100%,rgba(90,226,181,.08),transparent 26%),
+    var(--bg);overflow-x:hidden
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);
+  background-size:42px 42px;mask-image:linear-gradient(#000,transparent 90%)
+}
+.shell{width:min(1200px,calc(100% - 28px));margin:auto;padding:18px 0 70px}
+nav{
+  position:sticky;top:12px;z-index:20;display:flex;justify-content:space-between;align-items:center;
+  gap:12px;padding:12px 14px 12px 17px;border:1px solid var(--line);border-radius:20px;
+  background:rgba(10,12,18,.68);backdrop-filter:blur(22px);box-shadow:0 18px 50px rgba(0,0,0,.25)
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:-.02em}
+.logo{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;color:#080a0e;
+background:linear-gradient(145deg,#fff,#8f99aa);box-shadow:inset 0 1px 0 #fff}
+.nav-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+select,button,input,textarea{font:inherit}
+select,.btn,.field{
+  border:1px solid var(--line);background:rgba(255,255,255,.055);color:var(--text);
+  border-radius:13px;padding:10px 12px;outline:none
+}
+select option{background:#11151d;color:#fff}
+button{cursor:pointer}
+.btn:hover{background:rgba(255,255,255,.1);transform:translateY(-1px)}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:28px}
+.card{
+  border:1px solid var(--line);border-radius:var(--r);
+  background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
+  backdrop-filter:blur(22px);box-shadow:var(--shadow);overflow:hidden
+}
+.hero-main{padding:clamp(28px,5vw,62px)}
+.eyebrow{text-transform:uppercase;letter-spacing:.17em;color:#bcc3d0;font-size:12px;font-weight:800}
+h1{font-size:clamp(46px,7vw,86px);line-height:.94;letter-spacing:-.065em;margin:18px 0}
+.hero p{font-size:clamp(16px,2vw,20px);color:var(--muted);line-height:1.65;max-width:760px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.chip{border:1px solid var(--line);background:rgba(255,255,255,.04);padding:9px 12px;border-radius:999px;font-size:13px}
+.hero-side{padding:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:430px}
+.globe-wrap{height:230px;display:grid;place-items:center;perspective:900px}
+.globe{
+  width:175px;height:175px;border-radius:50%;position:relative;
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.22),transparent 16%),linear-gradient(145deg,#242a34,#0e1118);
+  border:1px solid rgba(255,255,255,.12);box-shadow:inset -20px -20px 45px rgba(0,0,0,.45),0 40px 60px rgba(0,0,0,.38);
+  animation:float 6s ease-in-out infinite
+}
+.globe:before{content:"A · Я · Ä · 文";position:absolute;inset:0;display:grid;place-items:center;font-weight:900;font-size:30px;letter-spacing:.12em;color:#eef1f6}
+@keyframes float{50%{transform:translateY(-8px) rotateY(-12deg)}}
+.quote{font-size:18px;line-height:1.5}.quote small{display:block;margin-top:10px;color:var(--muted);font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:18px}
+.today{grid-column:span 8;padding:26px}.stats-card{grid-column:span 4;padding:26px}
+.progress-card{grid-column:span 12;padding:26px}.roadmap-card{grid-column:span 7;padding:26px}.guide-card{grid-column:span 5;padding:26px}
+.section-head{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-bottom:18px}
+.section-head h2{margin:0;font-size:24px;letter-spacing:-.035em}.section-head span{font-size:13px;color:var(--muted)}
+.lang-config{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:15px}
+.label{font-size:11px;color:var(--muted);margin:0 0 6px 2px}
+.task-list{display:grid;gap:11px}
+.task{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:center;padding:15px;border:1px solid var(--line);border-radius:19px;background:rgba(255,255,255,.035)}
+.check{width:28px;height:28px;border-radius:9px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.15);display:grid;place-items:center;color:#0b0d11}
+.task.done .check{background:#f2f4f7}.task.done .task-name{text-decoration:line-through;color:#8d95a4}
+.task-name{font-weight:750}.task-desc{font-size:12px;color:var(--muted);margin-top:4px}.mins{font-size:12px;color:#dce0e8;border:1px solid var(--line);padding:7px 9px;border-radius:999px}
+.timer-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:15px}
+.timer{font-size:34px;font-weight:900;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.timer-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.primary{background:#f7f8fa;color:#080a0e;border:0;font-weight:850}
+.streak{font-size:72px;font-weight:900;letter-spacing:-.07em;margin:6px 0}.stats-card p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}
+.stat{padding:13px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04)}
+.stat b{font-size:20px;display:block}.stat span{font-size:11px;color:var(--muted)}
+.bar-wrap{height:14px;border-radius:999px;background:rgba(255,255,255,.055);overflow:hidden;border:1px solid var(--line)}
+.bar{height:100%;background:linear-gradient(90deg,#f4f5f7,#929baa);width:0;border-radius:inherit;transition:.6s}
+.progress-meta{display:flex;justify-content:space-between;margin-top:10px;color:var(--muted);font-size:13px}
+.roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-height:530px;overflow:auto;padding-right:4px}
+.week{padding:14px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.034)}
+.week.current{outline:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.08)}
+.week small{color:var(--muted)}.week p{font-size:12px;line-height:1.5;color:var(--muted);margin:7px 0 0}
+.guide-list{display:grid;gap:10px}.guide{padding:15px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.034)}
+.guide b{display:block;margin-bottom:5px}.guide span{font-size:12px;color:var(--muted);line-height:1.55}
+textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:18px;background:rgba(0,0,0,.17);color:var(--text);padding:15px;resize:vertical;outline:none}
+.note-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.note-history{display:grid;gap:8px;margin-top:12px}
+.note-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
+.note-item small{color:var(--muted)}
+footer{text-align:center;padding-top:34px;color:#737b88;font-size:12px}
+.toast{position:fixed;right:20px;bottom:20px;opacity:0;transform:translateY(12px);transition:.22s;padding:12px 15px;border:1px solid var(--line);border-radius:14px;background:rgba(14,17,23,.94);backdrop-filter:blur(20px);z-index:60}
+.toast.show{opacity:1;transform:none}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;place-items:center;padding:18px;z-index:50}
+.modal.show{display:grid}.modal-card{width:min(720px,100%);max-height:82vh;overflow:auto;padding:22px;border:1px solid var(--line);border-radius:24px;background:#0f131a;box-shadow:var(--shadow)}
+.modal-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}
+.modal-head h3{margin:0;font-size:21px}.close{width:36px;height:36px;border-radius:12px}
+.history-grid{display:grid;gap:10px}
+.history-day{padding:14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.035);cursor:pointer}
+.history-day:hover{background:rgba(255,255,255,.065)}.history-day b{display:block}.history-day small{color:var(--muted)}
+.history-detail{margin-top:16px;padding:15px;border-radius:17px;border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.history-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.danger{border-color:rgba(255,95,95,.35)!important;background:rgba(255,95,95,.08)!important}
+.danger:hover{background:rgba(255,95,95,.14)!important}
+.edit-area{width:100%;min-height:140px;margin-top:10px}
+[dir="rtl"] .toast{right:auto;left:20px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.today,.stats-card,.roadmap-card,.guide-card{grid-column:span 12}}
+@media(max-width:560px){.shell{width:calc(100% - 18px)}.brand span{display:none}.hero-main,.today,.stats-card,.progress-card,.roadmap-card,.guide-card{padding:20px}.lang-config{grid-template-columns:1fr}.task{grid-template-columns:auto 1fr}.mins{grid-column:2;justify-self:start}.stats{grid-template-columns:1fr}.roadmap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+<nav>
+  <div class="brand"><div class="logo">PJ</div><span data-i18n="brand">Polyglot Journey</span></div>
+  <div class="nav-actions">
+    <select id="uiLang" aria-label="Interface language">
+      <option value="en">English</option><option value="ar">العربية</option><option value="de">Deutsch</option>
+      <option value="ru">Русский</option><option value="es">Español</option><option value="fr">Français</option>
+    </select>
+    <button class="btn" id="historyBtn" data-i18n="history">Notes history</button>
+    <button class="btn" id="resetToday" data-i18n="reset">Reset today</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="card hero-main">
+    <div class="eyebrow" data-i18n="eyebrow">Universal language learning dashboard</div>
+    <h1 data-i18n="heroTitle">Learn one.<br>Keep another alive.</h1>
+    <p data-i18n="heroText">A flexible six-month system for anyone learning a language. Choose your main language, add an optional review language, keep sessions short, and let consistency do the heavy lifting.</p>
+    <div class="chips">
+      <span class="chip" data-i18n="chip1">🎯 Main language focus</span><span class="chip" data-i18n="chip2">🔁 Optional second-language review</span>
+      <span class="chip" data-i18n="chip3">⏱ Flexible daily timing</span><span class="chip" data-i18n="chip4">🧠 Low-friction mindset</span>
+    </div>
+  </div>
+  <aside class="card hero-side">
+    <div class="globe-wrap"><div class="globe"></div></div>
+    <div class="quote" id="quote"></div>
+  </aside>
+</section>
+
+<section class="grid">
+  <div class="card today">
+    <div class="section-head"><div><h2 data-i18n="today">Today</h2><span id="todayLabel"></span></div><span id="weekLabel"></span></div>
+    <div class="lang-config">
+      <div><div class="label" data-i18n="mainLanguage">Main language</div><select class="field" id="mainLang" style="width:100%"></select></div>
+      <div><div class="label" data-i18n="reviewLanguage">Review language</div><select class="field" id="reviewLang" style="width:100%"></select></div>
+    </div>
+    <div class="task-list" id="taskList"></div>
+    <div class="timer-row">
+      <div><div class="label" data-i18n="focusTimer">Focus timer</div><div class="timer" id="timer">40:00</div></div>
+      <div class="timer-actions">
+        <button class="btn" data-min="10">10m</button><button class="btn" data-min="20">20m</button><button class="btn" data-min="40">40m</button>
+        <button class="btn primary" id="timerToggle" data-i18n="start">Start</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card stats-card">
+    <div class="eyebrow" data-i18n="consistency">Consistency</div><div class="streak" id="streak">0</div>
+    <p data-i18n="streakText">day streak. A short session still counts. Keep the chain alive.</p>
+    <div class="stats">
+      <div class="stat"><b id="doneDays">0</b><span data-i18n="daysDone">days done</span></div>
+      <div class="stat"><b id="mainMinutes">0</b><span data-i18n="mainMinutes">main minutes</span></div>
+      <div class="stat"><b id="reviewMinutes">0</b><span data-i18n="reviewMinutes">review minutes</span></div>
+    </div>
+  </div>
+
+  <div class="card progress-card">
+    <div class="section-head"><h2 data-i18n="progress">Six-month progress</h2><span id="progressPct">0%</span></div>
+    <div class="bar-wrap"><div class="bar" id="bar"></div></div>
+    <div class="progress-meta"><span>Day 1</span><span id="daysLeft"></span><span>Day 180</span></div>
+  </div>
+
+  <div class="card roadmap-card">
+    <div class="section-head"><h2 data-i18n="roadmap">Universal 26-week roadmap</h2><span data-i18n="roadmapHint">works with any language</span></div>
+    <div class="roadmap" id="roadmap"></div>
+  </div>
+
+  <div class="card guide-card">
+    <div class="section-head"><h2 data-i18n="mindset">Learning mindset</h2><span data-i18n="reference">reference guide</span></div>
+    <div class="guide-list" id="guideList"></div>
+    <div style="margin-top:16px">
+      <div class="label" data-i18n="dailyNotes">Daily notes — saved by date</div>
+      <textarea id="dailyNotes" data-i18n-placeholder="dailyNotesPlaceholder" placeholder="What did you learn today? New words, mistakes, what to repeat tomorrow..."></textarea>
+      <div class="note-actions"><button class="btn primary" id="saveNote" data-i18n="saveNote">Save today's note</button><button class="btn" id="openHistory" data-i18n="viewHistory">View history</button></div>
+    </div>
+  </div>
+</section>
+<footer data-i18n="footer">Built for learners, not classrooms.</footer>
+</div>
+
+<div class="modal" id="historyModal">
+  <div class="modal-card">
+    <div class="modal-head"><h3 data-i18n="historyTitle">Daily notes history</h3><div style="display:flex;gap:8px"><button class="btn danger" id="clearAllNotes">Clear all</button><button class="btn close" id="closeHistory">✕</button></div></div>
+    <div class="history-grid" id="historyGrid"></div>
+    <div class="history-detail" id="historyDetail" style="display:none"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const languages=[["en","English"],["de","Deutsch"],["ru","Русский"],["ar","العربية"],["es","Español"],["fr","Français"],["it","Italiano"],["pt","Português"],["tr","Türkçe"],["ja","日本語"],["ko","한국어"],["zh","中文"],["nl","Nederlands"],["pl","Polski"]];
+
+const i18n={
+en:{
+brand:"Polyglot Journey",reset:"Reset today",history:"Notes history",eyebrow:"Universal language learning dashboard",
+heroTitle:"Learn one.<br>Keep another alive.",heroText:"A flexible six-month system for anyone learning a language. Choose your main language, add an optional review language, keep sessions short, and let consistency do the heavy lifting.",
+chip1:"🎯 Main language focus",chip2:"🔁 Optional second-language review",chip3:"⏱ Flexible daily timing",chip4:"🧠 Low-friction mindset",
+today:"Today",mainLanguage:"Main language",reviewLanguage:"Review language",focusTimer:"Focus timer",start:"Start",pause:"Pause",
+consistency:"Consistency",streakText:"day streak. A short session still counts. Keep the chain alive.",daysDone:"days done",mainMinutes:"main minutes",reviewMinutes:"review minutes",
+progress:"Six-month progress",roadmap:"Universal 26-week roadmap",roadmapHint:"works with any language",mindset:"Learning mindset",reference:"reference guide",
+dailyNotes:"Daily notes — saved by date",dailyNotesPlaceholder:"What did you learn today? New words, mistakes, what to repeat tomorrow...",saveNote:"Save today's note",viewHistory:"View history",
+historyTitle:"Daily notes history",footer:"Built for learners, not classrooms.",daysRemaining:"days remaining",week:"Week",none:"None",toastDone:"Day complete ✦",noteSaved:"Today's note saved",edit:"Edit",delete:"Delete",saveChanges:"Save changes",cancel:"Cancel",clearAll:"Clear all",confirmDelete:"Delete this note?",confirmClear:"Delete all saved daily notes?",
+tasks:[
+["Review yesterday","Quickly revisit yesterday's words or phrases.",5],
+["Vocabulary","Learn or review 8–12 useful words or phrases.",8],
+["Core lesson","Use a structured lesson, grammar point, or guided topic.",12],
+["Listening","Listen for the general meaning before translating.",8],
+["Reading","Read a short text, caption, dialogue, or graded paragraph.",4],
+["Output","Speak or write 3–5 sentences using today's material.",3]
+],
+reviewTask:["Second-language review","Keep it light: alphabet, familiar words, one short video, or a few spoken sentences.",10],
+guides:[
+["Consistency beats intensity","Short focused sessions repeated for months beat occasional huge study days."],
+["Use the language early","Speak and write before you feel ready. Mistakes are part of the process."],
+["Learn phrases, not isolated words","Useful chunks are easier to remember and use in real conversations."],
+["Input first, translation second","Try to understand the idea before reaching for translation."],
+["Make hard days smaller","Five focused minutes is better than a zero day."],
+["Review before adding more","Memory grows when you revisit useful material, not when you endlessly collect new content."]
+]
+},
+ar:{
+brand:"رحلة اللغات",reset:"إعادة اليوم",history:"سجل الملاحظات",eyebrow:"لوحة مرنة لتعلم أي لغة",
+heroTitle:"اتعلم لغة.<br>وحافظ على لغة تانية.",heroText:"نظام مرن لمدة ستة أشهر لأي شخص بيتعلم لغة. اختار لغتك الأساسية، وأضف لغة مراجعة اختيارية، وخلي الجلسات قصيرة والاستمرارية تعمل الفرق.",
+chip1:"🎯 تركيز على اللغة الأساسية",chip2:"🔁 مراجعة لغة ثانية اختيارية",chip3:"⏱ وقت يومي مرن",chip4:"🧠 بدون ضغط أكاديمي",
+today:"النهارده",mainLanguage:"اللغة الأساسية",reviewLanguage:"لغة المراجعة",focusTimer:"مؤقت التركيز",start:"ابدأ",pause:"إيقاف مؤقت",
+consistency:"الاستمرارية",streakText:"يوم متواصل. حتى الجلسة القصيرة تتحسب. حافظ على السلسلة.",daysDone:"أيام مكتملة",mainMinutes:"دقائق اللغة الأساسية",reviewMinutes:"دقائق المراجعة",
+progress:"تقدم الستة أشهر",roadmap:"خطة عامة لـ 26 أسبوع",roadmapHint:"تنفع لأي لغة",mindset:"عقلية التعلم",reference:"مرجع سريع",
+dailyNotes:"ملاحظات اليوم — تتحفظ بالتاريخ",dailyNotesPlaceholder:"إيه اللي اتعلمته النهارده؟ كلمات جديدة، أخطاء، وإيه محتاج تراجعه بكرة...",saveNote:"احفظ ملاحظة اليوم",viewHistory:"شوف السجل",
+historyTitle:"سجل الملاحظات اليومية",footer:"متعمل للمتعلمين، مش للفصول الدراسية.",daysRemaining:"يوم متبقي",week:"الأسبوع",none:"بدون",toastDone:"خلصت اليوم ✦",noteSaved:"تم حفظ ملاحظة اليوم",edit:"تعديل",delete:"حذف",saveChanges:"حفظ التعديل",cancel:"إلغاء",clearAll:"حذف الكل",confirmDelete:"تحذف الملاحظة دي؟",confirmClear:"تحذف كل الملاحظات المحفوظة؟",
+tasks:[
+["راجع امبارح","راجع بسرعة كلمات أو جمل امبارح.",5],
+["كلمات","اتعلم أو راجع من 8 لـ12 كلمة أو جملة مفيدة.",8],
+["الدرس الأساسي","استخدم درس منظم أو نقطة جرامر بسيطة.",12],
+["استماع","ركز على المعنى العام قبل ما تترجم.",8],
+["قراءة","اقرأ نص قصير، كابشن، حوار أو فقرة سهلة.",4],
+["إنتاج","اتكلم أو اكتب من 3 لـ5 جمل باستخدام اللي اتعلمته.",3]
+],
+reviewTask:["مراجعة اللغة الثانية","خليها خفيفة: حروف، كلمات مألوفة، فيديو قصير، أو شوية جمل بصوتك.",10],
+guides:[
+["الاستمرارية أهم من الشدة","جلسات قصيرة بانتظام أقوى من جلسة ضخمة كل فترة."],
+["استخدم اللغة بدري","اتكلم واكتب قبل ما تحس إنك جاهز. الغلط جزء من التعلم."],
+["اتعلم جمل مش كلمات منفصلة","الجمل والعبارات أسهل في التذكر والاستخدام الحقيقي."],
+["افهم الأول وترجم بعدين","حاول تمسك الفكرة قبل ما تروح للترجمة."],
+["صغّر المهمة في الأيام الصعبة","خمس دقايق أحسن من يوم بصفر."],
+["راجع قبل ما تزود الجديد","التكرار الذكي أهم من جمع محتوى كتير."]
+]
+},
+de:{brand:"Polyglot Journey",reset:"Heute zurücksetzen",history:"Notizen",eyebrow:"Universelles Sprachlern-Dashboard",heroTitle:"Eine Sprache lernen.<br>Eine andere behalten.",heroText:"Ein flexibles Sechs-Monats-System für jede Sprache. Wähle deine Hauptsprache, optional eine zweite Sprache zur Wiederholung und bleib konstant.",chip1:"🎯 Fokus auf Hauptsprache",chip2:"🔁 Optionale Zweitsprache",chip3:"⏱ Flexible Lernzeit",chip4:"🧠 Weniger Druck",today:"Heute",mainLanguage:"Hauptsprache",reviewLanguage:"Wiederholungssprache",focusTimer:"Fokus-Timer",start:"Start",pause:"Pause",consistency:"Konstanz",streakText:"Tage in Folge. Auch eine kurze Einheit zählt.",daysDone:"Tage erledigt",mainMinutes:"Hauptsprache Minuten",reviewMinutes:"Wiederholungsminuten",progress:"Sechs-Monats-Fortschritt",roadmap:"Universeller 26-Wochen-Plan",roadmapHint:"für jede Sprache",mindset:"Lern-Mindset",reference:"Kurzreferenz",dailyNotes:"Tagesnotizen — nach Datum gespeichert",dailyNotesPlaceholder:"Was hast du heute gelernt?",saveNote:"Heutige Notiz speichern",viewHistory:"Verlauf ansehen",historyTitle:"Notizverlauf",footer:"Für Lernende gebaut, nicht für Klassenzimmer.",daysRemaining:"Tage übrig",week:"Woche",none:"Keine",toastDone:"Tag abgeschlossen ✦",noteSaved:"Notiz gespeichert",edit:"Bearbeiten",delete:"Löschen",saveChanges:"Änderungen speichern",cancel:"Abbrechen",clearAll:"Alles löschen",confirmDelete:"Diese Notiz löschen?",confirmClear:"Alle Notizen löschen?",tasks:[["Gestern wiederholen","Wörter oder Sätze von gestern kurz wiederholen.",5],["Wortschatz","8–12 nützliche Wörter oder Sätze lernen.",8],["Hauptlektion","Strukturierte Lektion oder Grammatik.",12],["Hören","Zuerst auf die allgemeine Bedeutung achten.",8],["Lesen","Kurzen Text oder Dialog lesen.",4],["Output","3–5 Sätze sprechen oder schreiben.",3]],reviewTask:["Zweitsprache wiederholen","Locker: Alphabet, bekannte Wörter, kurzes Video oder ein paar Sätze.",10],guides:[["Konstanz schlägt Intensität","Kurze regelmäßige Einheiten wirken langfristig stärker."],["Früh benutzen","Sprich und schreibe, bevor du dich bereit fühlst."],["Sätze statt Einzelwörter","Nützliche Chunks lassen sich leichter anwenden."],["Erst verstehen, dann übersetzen","Versuche zuerst die Idee zu verstehen."],["An schweren Tagen kleiner machen","Fünf Minuten sind besser als null."],["Wiederholen vor Neuem","Gutes Wiederholen ist wichtiger als endlos neues Material."]]},
+ru:{brand:"Polyglot Journey",reset:"Сбросить сегодня",history:"История заметок",eyebrow:"Универсальная панель изучения языков",heroTitle:"Учи один язык.<br>Поддерживай другой.",heroText:"Гибкая система на шесть месяцев для любого языка. Выбери основной язык, добавь язык для повторения и сохраняй регулярность.",chip1:"🎯 Основной язык",chip2:"🔁 Второй язык по желанию",chip3:"⏱ Гибкое время",chip4:"🧠 Без лишнего давления",today:"Сегодня",mainLanguage:"Основной язык",reviewLanguage:"Язык для повторения",focusTimer:"Таймер фокуса",start:"Старт",pause:"Пауза",consistency:"Регулярность",streakText:"дней подряд. Даже короткое занятие считается.",daysDone:"дней выполнено",mainMinutes:"минут основного языка",reviewMinutes:"минут повторения",progress:"Прогресс за 6 месяцев",roadmap:"Универсальный план на 26 недель",roadmapHint:"для любого языка",mindset:"Подход к обучению",reference:"краткий справочник",dailyNotes:"Ежедневные заметки — по датам",dailyNotesPlaceholder:"Что ты выучил сегодня?",saveNote:"Сохранить заметку",viewHistory:"История",historyTitle:"История ежедневных заметок",footer:"Сделано для учеников, а не для класса.",daysRemaining:"дней осталось",week:"Неделя",none:"Нет",toastDone:"День завершён ✦",noteSaved:"Заметка сохранена",edit:"Изменить",delete:"Удалить",saveChanges:"Сохранить",cancel:"Отмена",clearAll:"Удалить всё",confirmDelete:"Удалить эту заметку?",confirmClear:"Удалить все заметки?",tasks:[["Повтори вчера","Быстро повтори вчерашние слова или фразы.",5],["Слова","Выучи или повтори 8–12 полезных слов или фраз.",8],["Основной урок","Структурированный урок или грамматика.",12],["Аудирование","Сначала слушай общий смысл.",8],["Чтение","Прочитай короткий текст или диалог.",4],["Практика","Скажи или напиши 3–5 предложений.",3]],reviewTask:["Повторение второго языка","Легко: алфавит, знакомые слова, короткое видео или несколько фраз.",10],guides:[["Регулярность важнее интенсивности","Короткие занятия каждый день дают большой эффект."],["Используй язык рано","Говори и пиши до того, как почувствуешь готовность."],["Учи фразы","Фразы легче запоминаются и применяются."],["Сначала смысл","Сначала пойми идею, потом переводи."],["Уменьшай задачу","Пять минут лучше, чем ноль."],["Повторяй","Повторение полезного важнее бесконечного нового контента."]]}
+};
+for(const code of ["es","fr"]) i18n[code]=i18n.en;
+
+const roadmap=["Sound & pronunciation","Greetings and survival phrases","Core sentence patterns","High-frequency verbs","Numbers, time and dates","Food and ordering","Daily routine","Home and city","Questions and answers","Listening foundations","Reading short texts","Speaking mini-monologues","Checkpoint 1","Travel situations","Work and study vocabulary","Descriptions and comparisons","Connectors and longer sentences","Listening with native content","Writing short messages","Conversation repair strategies","Grammar bridge","Real-world scenarios","More speaking, less translating","Comprehension week","Checkpoint 2","Final consolidation"];
+
+const stateKey="polyglotJourney_v2",todayKey=new Date().toISOString().slice(0,10);
+let state=JSON.parse(localStorage.getItem(stateKey)||'{"days":{},"notesByDate":{},"ui":"en","main":"de","review":"ru"}');
+if(!state.days)state.days={};if(!state.notesByDate)state.notesByDate={};
+const $=s=>document.querySelector(s),T=()=>i18n[state.ui]||i18n.en;
+function save(){localStorage.setItem(stateKey,JSON.stringify(state))}
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1500)}
+function initLangSelects(){const opts=languages.map(([c,n])=>`<option value="${c}">${n}</option>`).join("");$("#mainLang").innerHTML=opts;$("#reviewLang").innerHTML=`<option value="none">${T().none}</option>`+opts;$("#mainLang").value=state.main||"de";$("#reviewLang").value=state.review||"ru"}
+function dayIndex(){if(!state.startDate){state.startDate=todayKey;save();return 0}const d=Math.floor((new Date(todayKey+"T00:00:00")-new Date(state.startDate+"T00:00:00"))/86400000);return Math.max(0,Math.min(179,d))}
+function weekIndex(){return Math.min(25,Math.floor(dayIndex()/7))}
+function renderI18n(){document.documentElement.lang=state.ui;document.documentElement.dir=state.ui==="ar"?"rtl":"ltr";document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(T()[k]!==undefined)el.innerHTML=T()[k]});document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{el.placeholder=T()[el.dataset.i18nPlaceholder]||""});$("#uiLang").value=state.ui;initLangSelects()}
+function renderToday(){const d=new Date();$("#todayLabel").textContent=d.toLocaleDateString(state.ui==="ar"?"ar-EG":state.ui,{weekday:"long",month:"short",day:"numeric"});$("#weekLabel").textContent=`${T().week} ${weekIndex()+1} / 26`;const tasks=[...T().tasks];if(state.review!=="none")tasks.push(T().reviewTask);const day=state.days[todayKey]||{tasks:{}};$("#taskList").innerHTML=tasks.map((t,i)=>`<div class="task ${day.tasks?.[i]?"done":""}" data-i="${i}"><button class="check">${day.tasks?.[i]?"✓":""}</button><div><div class="task-name">${t[0]}</div><div class="task-desc">${t[1]}</div></div><div class="mins">${t[2]} min</div></div>`).join("");document.querySelectorAll(".task .check").forEach(btn=>btn.onclick=()=>{const i=btn.parentElement.dataset.i;state.days[todayKey]||={tasks:{}};state.days[todayKey].tasks||={};state.days[todayKey].tasks[i]=!state.days[todayKey].tasks[i];const needed=tasks.length,done=Object.values(state.days[todayKey].tasks).filter(Boolean).length;state.days[todayKey].complete=done===needed;if(done===needed)toast(T().toastDone);save();renderToday();renderStats()})}
+function renderStats(){const completed=Object.entries(state.days).filter(([_,v])=>v.complete).map(([k])=>k).sort();$("#doneDays").textContent=completed.length;$("#mainMinutes").textContent=completed.length*40;$("#reviewMinutes").textContent=state.review==="none"?0:completed.length*10;let streak=0,cursor=new Date(todayKey+"T00:00:00");for(let i=0;i<365;i++){const k=cursor.toISOString().slice(0,10);if(state.days[k]?.complete){streak++;cursor.setDate(cursor.getDate()-1)}else{if(i===0){cursor.setDate(cursor.getDate()-1);continue}break}}$("#streak").textContent=streak;const elapsed=dayIndex()+1,pct=Math.min(100,Math.round(elapsed/180*100));$("#progressPct").textContent=pct+"%";$("#bar").style.width=pct+"%";$("#daysLeft").textContent=`${Math.max(0,180-elapsed)} ${T().daysRemaining}`}
+function renderRoadmap(){$("#roadmap").innerHTML=roadmap.map((x,i)=>`<div class="week ${i===weekIndex()?"current":""}"><strong>${T().week} ${i+1}</strong><p>${x}</p></div>`).join("")}
+function renderGuides(){$("#guideList").innerHTML=T().guides.map(g=>`<div class="guide"><b>${g[0]}</b><span>${g[1]}</span></div>`).join("")}
+const quotes=[["Small sessions beat rare heroic ones.","Consistency > intensity."],["Speak before you feel ready.","Use the language."],["A five-minute day still keeps the identity alive.","No zero days."],["Learn useful phrases, not impressive word lists.","Make it practical."],["The goal is not to study forever. The goal is to understand and communicate.","Keep moving."]];
+function renderQuote(){const q=quotes[new Date().getDate()%quotes.length];$("#quote").innerHTML=`“${q[0]}”<small>${q[1]}</small>`}
+function loadTodayNote(){$("#dailyNotes").value=state.notesByDate[todayKey]?.text||""}
+function renderHistory(){
+  const grid=$("#historyGrid"),detail=$("#historyDetail");
+  const entries=Object.entries(state.notesByDate).filter(([_,v])=>v?.text?.trim()).sort((a,b)=>b[0].localeCompare(a[0]));
+  $("#clearAllNotes").textContent=T().clearAll||"Clear all";
+  if(!entries.length){
+    grid.innerHTML=`<div class="guide"><span>No saved daily notes yet.</span></div>`;
+    detail.style.display="none";return
+  }
+  grid.innerHTML=entries.map(([date,v])=>`<div class="history-day" data-date="${date}">
+    <b>${new Date(date+"T00:00:00").toLocaleDateString(state.ui==="ar"?"ar-EG":state.ui,{weekday:"short",year:"numeric",month:"short",day:"numeric"})}</b>
+    <small>${v.text.slice(0,85)}${v.text.length>85?"…":""}</small>
+  </div>`).join("");
+  document.querySelectorAll(".history-day").forEach(el=>el.onclick=()=>showHistoryDetail(el.dataset.date));
+}
+function esc(s){return String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]))}
+function showHistoryDetail(date){
+  const detail=$("#historyDetail"),v=state.notesByDate[date]; if(!v)return;
+  detail.style.display="block";
+  detail.innerHTML=`<b>${date}</b>
+    <p style="white-space:pre-wrap;color:var(--muted);line-height:1.7">${esc(v.text)}</p>
+    <div class="history-actions">
+      <button class="btn" id="editNoteBtn">${T().edit||"Edit"}</button>
+      <button class="btn danger" id="deleteNoteBtn">${T().delete||"Delete"}</button>
+    </div>`;
+  $("#editNoteBtn").onclick=()=>editHistoryNote(date);
+  $("#deleteNoteBtn").onclick=()=>deleteHistoryNote(date);
+}
+function editHistoryNote(date){
+  const detail=$("#historyDetail"),v=state.notesByDate[date]; if(!v)return;
+  detail.innerHTML=`<b>${date}</b>
+    <textarea class="edit-area" id="historyEditArea">${esc(v.text)}</textarea>
+    <div class="history-actions">
+      <button class="btn primary" id="saveHistoryEdit">${T().saveChanges||"Save changes"}</button>
+      <button class="btn" id="cancelHistoryEdit">${T().cancel||"Cancel"}</button>
+    </div>`;
+  $("#saveHistoryEdit").onclick=()=>{
+    const text=$("#historyEditArea").value.trim();
+    if(text){state.notesByDate[date]={text,updatedAt:new Date().toISOString()}}
+    else{delete state.notesByDate[date]}
+    save();
+    if(date===todayKey)loadTodayNote();
+    renderHistory();
+    if(state.notesByDate[date])showHistoryDetail(date);
+    toast(T().noteSaved||"Saved");
+  };
+  $("#cancelHistoryEdit").onclick=()=>showHistoryDetail(date);
+}
+function deleteHistoryNote(date){
+  if(!confirm(T().confirmDelete||"Delete this note?"))return;
+  delete state.notesByDate[date]; save();
+  if(date===todayKey)loadTodayNote();
+  $("#historyDetail").style.display="none";
+  renderHistory(); toast(T().delete||"Deleted");
+}
+function openHistory(){renderHistory();$("#historyModal").classList.add("show")}
+$("#uiLang").onchange=e=>{state.ui=e.target.value;save();renderAll()}
+$("#mainLang").onchange=e=>{state.main=e.target.value;save();toast("Main language updated")}
+$("#reviewLang").onchange=e=>{state.review=e.target.value;state.days[todayKey]={tasks:{}};save();renderToday();renderStats();toast("Review language updated")}
+$("#resetToday").onclick=()=>{delete state.days[todayKey];save();renderToday();renderStats();toast("Today reset")}
+$("#saveNote").onclick=()=>{const text=$("#dailyNotes").value.trim();state.notesByDate[todayKey]={text,updatedAt:new Date().toISOString()};save();toast(T().noteSaved)}
+$("#openHistory").onclick=openHistory;$("#historyBtn").onclick=openHistory;$("#clearAllNotes").onclick=()=>{if(confirm(T().confirmClear||"Delete all saved daily notes?")){state.notesByDate={};save();loadTodayNote();renderHistory();toast(T().clearAll||"Cleared")}};$("#closeHistory").onclick=()=>$("#historyModal").classList.remove("show");$("#historyModal").onclick=e=>{if(e.target.id==="historyModal")$("#historyModal").classList.remove("show")}
+let secs=2400,timerId=null;function updateTimer(){const m=Math.floor(secs/60),s=secs%60;$("#timer").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
+document.querySelectorAll("[data-min]").forEach(b=>b.onclick=()=>{if(timerId){clearInterval(timerId);timerId=null}secs=+b.dataset.min*60;updateTimer();$("#timerToggle").textContent=T().start})
+$("#timerToggle").onclick=()=>{if(timerId){clearInterval(timerId);timerId=null;$("#timerToggle").textContent=T().start;return}$("#timerToggle").textContent=T().pause;timerId=setInterval(()=>{secs--;updateTimer();if(secs<=0){clearInterval(timerId);timerId=null;$("#timerToggle").textContent=T().start;toast("Session complete ✦")}},1000)}
+function renderAll(){renderI18n();renderToday();renderStats();renderRoadmap();renderGuides();renderQuote();loadTodayNote()}
+updateTimer();renderAll();
+</script>
+</body>
+</html>
