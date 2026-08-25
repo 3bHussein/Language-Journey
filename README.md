@@ -1,179 +1,210 @@
-# Language Journey — 180 Days 🇩🇪 🇷🇺
+# Polyglot Journey 🌍
 
-A personal six-month language project built around one simple idea:
+A lightweight, open-source language-learning dashboard for anyone who wants to learn **one language**, maintain **another**, or build a consistent multilingual routine.
 
-> **German gets the focus. Russian stays alive. Consistency wins.**
+The project is intentionally simple:
 
-This repository is not meant to be a full language course.  
-It is my personal dashboard and commitment system — something I can open every day and immediately remember *why I started*.
+- one standalone `index.html`
+- no framework
+- no database
+- no backend
+- progress saved in browser `localStorage`
+- ready for GitHub Pages or basic/free hosting
 
-## The Goal
+## Why this project exists
 
-For 6 months:
+Many language learners do not need another giant course platform.
 
-- 🇩🇪 **German:** up to **40 minutes per day**
-- 🇷🇺 **Russian:** up to **10 minutes per day**
-- Keep the routine light enough that I can stay consistent.
-- Use German as the main new skill.
-- Restore my previous Russian A1 foundation and gradually move toward A2-level material.
+They need a place that helps them:
 
-### Expected German Direction
+- remember what to do today,
+- keep sessions short,
+- see progress,
+- maintain consistency,
+- avoid academic overload,
+- and keep motivation visible.
 
-With consistent daily work, the realistic target is:
+Polyglot Journey is designed around that idea.
 
-- Strong **A1**
-- Progress into **A2**
-- Better listening confidence
-- Basic everyday conversation
-- Useful travel / work / relocation vocabulary
+## Features
 
-### Expected Russian Direction
+- Choose a **main language**
+- Choose an optional **review language**
+- Interface language switcher
+- Supported UI languages:
+  - English
+  - Arabic
+  - German
+  - Russian
+  - Spanish
+  - French
+- Main language list includes:
+  - English
+  - German
+  - Russian
+  - Arabic
+  - Spanish
+  - French
+  - Italian
+  - Portuguese
+  - Turkish
+  - Japanese
+  - Korean
+  - Chinese
+  - Dutch
+  - Polish
+- Daily checklist
+- Focus timer
+- Streak counter
+- Six-month progress
+- Universal 26-week roadmap
+- Language-learning mindset/reference guide
+- Auto-saved notes
+- Responsive design
+- LocalStorage persistence
 
-Russian is intentionally lighter:
+## Recommended daily structure
 
-- Relearn the Cyrillic alphabet
-- Restore basic vocabulary and sentence patterns
-- Return to a comfortable A1
-- Start touching A2 material without pressure
+### Main language — around 40 minutes
 
----
+1. **Vocabulary — 10 min**
+   - Review 8–12 useful words or phrases.
 
-## Daily Routine
+2. **Core lesson — 15 min**
+   - Structured course, grammar topic, or guided lesson.
 
-### German — 40 min max
+3. **Listening — 10 min**
+   - Focus on meaning rather than understanding every word.
 
-1. **10 min — Vocabulary**
-   - Review 8–12 useful words.
+4. **Output — 5 min**
+   - Speak or write 3–5 sentences.
 
-2. **15 min — Main lesson**
-   - Nicos Weg / Deutsche Welle / another structured source.
+### Optional review language — around 10 minutes
 
-3. **10 min — Listening**
-   - Easy German, slow German, short real-world videos.
+Keep it light:
 
-4. **5 min — Output**
-   - Write or say 3–5 sentences about the day.
-
-### Russian — 10 min max
-
-Keep it simple:
-
-- alphabet review,
-- familiar words,
-- one short YouTube video,
+- alphabet/pronunciation refresh,
+- familiar vocabulary,
+- short YouTube video,
 - shadowing,
 - a few spoken sentences.
 
-The purpose is **continuity**, not intensity.
+The goal is continuity, not intensity.
 
----
+## Learning principles
 
-## What the Dashboard Includes
+### Consistency beats intensity
 
-- Daily checklist
-- 40 / 15 / 10 minute focus timer
-- Day streak
-- German and Russian minute counters
-- 180-day progress bar
-- 26-week roadmap
-- Auto-saved personal notes
-- LocalStorage persistence
-- Responsive mobile layout
-- No frameworks
-- One standalone HTML file
+Short sessions repeated for months are more useful than occasional huge study days.
 
----
+### Use the language early
 
-## Six-Month Milestones
+Speak and write before you feel ready.
 
-### Month 1 — Restart & Foundations
-German pronunciation, greetings, core vocabulary, simple sentences.  
-Russian alphabet and basic phrases return.
+### Learn phrases, not just words
 
-### Month 2 — Daily-Life Language
-Food, home, routine, transport, common verbs.
+Useful sentence chunks are easier to recall in real conversations.
 
-### Month 3 — Real Listening
-Start understanding slow native content without translating every word.
+### Understand before translating
 
-### Month 4 — Conversation Building
-Connect sentences, describe work, plans, travel and everyday situations.
+Try to catch the meaning first.
 
-### Month 5 — A2 Bridge
-More listening, speaking, common grammar patterns and practical scenarios.
+### Make hard days smaller
 
-### Month 6 — Consolidation
-Use the language rather than constantly “studying” it.
+Five focused minutes is better than zero.
 
----
+### Review before adding more
 
-## Rules for Myself
+Memory grows through useful repetition.
 
-- I do **not** need a perfect day.
-- I can do the easy version when energy is low.
-- Missing one day is not failure.
-- Two missed days in a row is a warning.
-- I should speak early, even with mistakes.
-- I should not turn this into another stressful academic project.
+## Universal 26-week roadmap
 
----
+The roadmap is intentionally language-neutral.
 
-## Suggested Learning Sources
+It moves through:
 
-### German
-- Deutsche Welle — Nicos Weg
-- Easy German
-- Language Reactor / subtitles when useful
-- Short German podcasts for beginners
+- pronunciation
+- survival phrases
+- sentence patterns
+- high-frequency verbs
+- numbers and time
+- food
+- routines
+- home and city
+- questions
+- listening
+- reading
+- speaking
+- travel
+- work/study vocabulary
+- descriptions
+- connectors
+- writing
+- real-world situations
+- comprehension
+- consolidation
 
-### Russian
-- Short YouTube review videos
-- Slow Russian beginner content
-- Alphabet / pronunciation refreshers
-- Familiar A1 vocabulary
+Anyone can adapt it to English, German, Russian, Spanish, Arabic, French, or another language.
 
----
+## Run locally
 
-## Running the Project
-
-Just open:
+Open:
 
 ```text
 index.html
 ```
 
-No installation is required.
+That is all.
 
-The dashboard stores progress using your browser's **LocalStorage**, so use the same browser/device if you want your streak and notes to remain available.
+## Hosting
 
----
+This project works on:
 
-## Repository Structure
+- GitHub Pages
+- Netlify
+- Cloudflare Pages
+- basic shared hosting
+- free static hosting
+
+No database is required.
+
+## Data storage
+
+Progress is stored with browser `localStorage`.
+
+That means:
+
+- refreshing the page does not remove your progress;
+- closing and reopening the browser keeps your progress;
+- clearing browser/site data will remove it;
+- using another browser/device will have separate progress.
+
+## Repository structure
 
 ```text
-language-journey/
+polyglot-journey/
 ├── index.html
 └── README.md
 ```
 
----
+## Contribution ideas
 
-# Message to My Future Self
+Future contributors could add:
 
-If you are reading this six months later:
+- more interface translations
+- custom daily time targets
+- import/export progress
+- PWA support
+- custom roadmaps
+- resource links by language
+- pronunciation practice
+- achievements
+- accessibility improvements
 
-You started this project because you wanted to prove that learning something new did not need to become another overwhelming commitment.
+## Philosophy
 
-You gave German only 40 minutes.
+> Learn one. Keep another alive.
 
-You gave Russian only 10 minutes.
+The project is not about perfect streaks.
 
-The important part was opening the page again tomorrow.
-
-Look at where you are now.
-
-Even if you did not complete every day, compare what you knew at the beginning with what you can understand, say, read, and recognize today.
-
-**That difference is the project.**
-
-— Day 1
+It is about building a small system that makes language learning easy to return to tomorrow.
