@@ -29,6 +29,8 @@ It helps you:
 - 🔥 Maintain a streak
 - 📈 Track six months of progress
 - 📝 Save notes for each individual day
+- ✏️ Edit any saved daily note
+- 🗑 Delete individual notes or clear the full notes history
 - 🗂 Reopen previous daily notes from a history popup
 - 🌐 Switch the interface language
 - 🧠 Keep practical learning principles visible
