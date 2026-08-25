@@ -1,185 +1,200 @@
-# Polyglot Journey 🌍
+<div align="center">
 
-A lightweight, open-source language-learning dashboard for anyone who wants to learn **one language**, maintain **another**, or build a consistent multilingual routine.
+# 🌍 Polyglot Journey
 
-The project is intentionally simple:
+### A beautiful, lightweight language-learning dashboard for building consistency.
 
-- one standalone `index.html`
-- no framework
-- no database
-- no backend
-- progress saved in browser `localStorage`
-- ready for GitHub Pages or basic/free hosting
+![HTML](https://img.shields.io/badge/HTML-Standalone-orange?style=for-the-badge&logo=html5)
+![CSS](https://img.shields.io/badge/CSS-Inline-blue?style=for-the-badge&logo=css3)
+![JavaScript](https://img.shields.io/badge/JavaScript-Inline-yellow?style=for-the-badge&logo=javascript)
+![No Backend](https://img.shields.io/badge/Backend-Not%20Required-success?style=for-the-badge)
+![Static Hosting](https://img.shields.io/badge/Hosting-Static%20Ready-purple?style=for-the-badge)
 
-## Why this project exists
+**Learn one language. Keep another alive. Build a system you can return to every day.**
 
-Many language learners do not need another giant course platform.
+</div>
 
-They need a place that helps them:
+---
 
-- remember what to do today,
-- keep sessions short,
-- see progress,
-- maintain consistency,
-- avoid academic overload,
-- and keep motivation visible.
+## ✨ What is Polyglot Journey?
 
-Polyglot Journey is designed around that idea.
+**Polyglot Journey** is a personal language-learning dashboard designed for people who do not need another complicated course platform.
 
-## Features
+It helps you:
 
-- Choose a **main language**
-- Choose an optional **review language**
-- Interface language switcher
-- Supported UI languages:
-  - English
-  - Arabic
-  - German
-  - Russian
-  - Spanish
-  - French
-- Main language list includes:
-  - English
-  - German
-  - Russian
-  - Arabic
-  - Spanish
-  - French
-  - Italian
-  - Portuguese
-  - Turkish
-  - Japanese
-  - Korean
-  - Chinese
-  - Dutch
-  - Polish
-- Daily checklist
-- Focus timer
-- Streak counter
-- Six-month progress
-- Universal 26-week roadmap
-- Language-learning mindset/reference guide
-- Auto-saved notes
-- Responsive design
-- LocalStorage persistence
+- 🎯 Focus on one main language
+- 🔁 Keep a second language alive
+- ✅ Follow a simple daily routine
+- ⏱ Use a built-in focus timer
+- 🔥 Maintain a streak
+- 📈 Track six months of progress
+- 📝 Save notes for each individual day
+- 🗂 Reopen previous daily notes from a history popup
+- 🌐 Switch the interface language
+- 🧠 Keep practical learning principles visible
 
-## Recommended daily structure
+---
+
+## 🚀 Core idea
+
+> **Consistency beats intensity.**
+
+You do not need a huge study session every day.
+
+A simple routine that you can repeat for months is more valuable than an ambitious plan you abandon after one week.
+
+---
+
+## 🗓 Daily routine
 
 ### Main language — around 40 minutes
 
-1. **Vocabulary — 10 min**
-   - Review 8–12 useful words or phrases.
+| Step | Time | Goal |
+|---|---:|---|
+| 🔄 Review yesterday | 5 min | Revisit yesterday's useful words and phrases |
+| 🧩 Vocabulary | 8 min | Learn or review 8–12 useful chunks |
+| 📘 Core lesson | 12 min | Structured lesson or grammar point |
+| 🎧 Listening | 8 min | Understand the general meaning first |
+| 📖 Reading | 4 min | Short text, caption, dialogue, or graded paragraph |
+| 🗣 Output | 3 min | Speak or write 3–5 sentences |
 
-2. **Core lesson — 15 min**
-   - Structured course, grammar topic, or guided lesson.
-
-3. **Listening — 10 min**
-   - Focus on meaning rather than understanding every word.
-
-4. **Output — 5 min**
-   - Speak or write 3–5 sentences.
-
-### Optional review language — around 10 minutes
+### Optional review language — 10 minutes
 
 Keep it light:
 
-- alphabet/pronunciation refresh,
-- familiar vocabulary,
-- short YouTube video,
-- shadowing,
-- a few spoken sentences.
+- alphabet refresh
+- pronunciation
+- familiar vocabulary
+- shadowing
+- a short video
+- a few spoken sentences
 
-The goal is continuity, not intensity.
+The goal is **continuity**, not pressure.
 
-## Learning principles
+---
 
-### Consistency beats intensity
+## 🌐 Interface languages
 
-Short sessions repeated for months are more useful than occasional huge study days.
+The dashboard currently includes:
 
-### Use the language early
+- 🇬🇧 English
+- 🇪🇬 العربية
+- 🇩🇪 Deutsch
+- 🇷🇺 Русский
+- 🇪🇸 Español
+- 🇫🇷 Français
+
+The learning-language selector includes many more languages.
+
+---
+
+## 📝 Daily Notes History
+
+Each day has its **own note**.
+
+Your notes are stored by date using browser `localStorage`.
+
+You can:
+
+1. Write what you learned today.
+2. Save it.
+3. Open **Notes History**.
+4. Select an old date.
+5. Review exactly what you wrote on that day.
+
+This makes the dashboard useful as a small six-month language journal.
+
+---
+
+## 🧠 Learning mindset
+
+### 🔥 Consistency beats intensity
+
+Short focused sessions repeated for months beat occasional huge study days.
+
+### 🗣 Use the language early
 
 Speak and write before you feel ready.
 
-### Learn phrases, not just words
+### 🧩 Learn phrases, not isolated words
 
-Useful sentence chunks are easier to recall in real conversations.
+Useful chunks are easier to remember and use in real conversations.
 
-### Understand before translating
+### 🎧 Input first, translation second
 
-Try to catch the meaning first.
+Try to understand the idea before reaching for a translation.
 
-### Make hard days smaller
+### 🪶 Make hard days smaller
 
-Five focused minutes is better than zero.
+Five minutes is better than zero.
 
-### Review before adding more
+### 🔄 Review before adding more
 
-Memory grows through useful repetition.
+Memory grows through repetition, not endless collection.
 
-## Universal 26-week roadmap
+---
 
-The roadmap is intentionally language-neutral.
+## 🗺 26-Week Universal Roadmap
 
-It moves through:
+The roadmap is deliberately language-neutral.
 
-- pronunciation
-- survival phrases
-- sentence patterns
-- high-frequency verbs
-- numbers and time
-- food
-- routines
-- home and city
-- questions
-- listening
-- reading
-- speaking
-- travel
-- work/study vocabulary
-- descriptions
-- connectors
-- writing
-- real-world situations
-- comprehension
-- consolidation
+It includes:
 
-Anyone can adapt it to English, German, Russian, Spanish, Arabic, French, or another language.
+`Pronunciation → Survival Phrases → Core Sentences → Verbs → Time → Food → Daily Routine → City → Questions → Listening → Reading → Speaking → Travel → Work → Descriptions → Connectors → Writing → Real-Life Scenarios → Consolidation`
 
-## Run locally
+That means you can use the same structure for:
 
-Open:
+**English, German, Russian, Arabic, Spanish, French, Italian, Japanese, Turkish, Chinese, and more.**
+
+---
+
+## 💾 How progress is stored
+
+Polyglot Journey uses:
+
+```text
+browser localStorage
+```
+
+So you do **not** need:
+
+- ❌ MySQL
+- ❌ PHP
+- ❌ Node.js
+- ❌ Firebase
+- ❌ JSON database
+- ❌ Server-side code
+
+Refreshing the page keeps your progress.
+
+Closing the browser keeps your progress.
+
+> ⚠️ Clearing browser/site data will remove locally saved progress.
+
+Different browsers or devices keep separate progress.
+
+---
+
+## 🌐 Hosting
+
+Because the project is fully static, it can run on:
+
+- GitHub Pages
+- Cloudflare Pages
+- Netlify
+- shared hosting
+- free static hosting
+- almost any basic web host
+
+Simply upload:
 
 ```text
 index.html
 ```
 
-That is all.
+---
 
-## Hosting
-
-This project works on:
-
-- GitHub Pages
-- Netlify
-- Cloudflare Pages
-- basic shared hosting
-- free static hosting
-
-No database is required.
-
-## Data storage
-
-Progress is stored with browser `localStorage`.
-
-That means:
-
-- refreshing the page does not remove your progress;
-- closing and reopening the browser keeps your progress;
-- clearing browser/site data will remove it;
-- using another browser/device will have separate progress.
-
-## Repository structure
+## 📁 Project structure
 
 ```text
 polyglot-journey/
@@ -187,24 +202,55 @@ polyglot-journey/
 └── README.md
 ```
 
-## Contribution ideas
+No build step.
 
-Future contributors could add:
+No installation.
 
-- more interface translations
-- custom daily time targets
-- import/export progress
-- PWA support
-- custom roadmaps
-- resource links by language
-- pronunciation practice
-- achievements
-- accessibility improvements
+No dependencies.
 
-## Philosophy
+---
 
-> Learn one. Keep another alive.
+## ▶️ Run locally
 
-The project is not about perfect streaks.
+Double-click:
 
-It is about building a small system that makes language learning easy to return to tomorrow.
+```text
+index.html
+```
+
+That's it.
+
+---
+
+## 💡 Future ideas
+
+Possible community improvements:
+
+- 📤 Backup / import progress
+- 🏆 Achievements
+- 🎯 Custom daily targets
+- 📚 Custom roadmaps
+- 🔊 Pronunciation exercises
+- 🧭 Language-specific resource packs
+- 📱 PWA / installable app support
+- 🎨 More themes
+- 🌐 More complete UI translations
+- ♿ Accessibility improvements
+
+---
+
+## 🤝 Contributions
+
+Ideas, improvements, translations, and UI refinements are welcome.
+
+If this project helps another learner stay consistent for even one extra week, it has already done something useful.
+
+---
+
+<div align="center">
+
+### 🌍 Learn one. Keep another alive.
+
+**Small sessions. Real consistency. Six months of visible progress.**
+
+</div>
